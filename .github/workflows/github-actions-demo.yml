@@ -21,4 +21,4 @@ jobs:
       - name: Get PR labels
         id: pr-labels
         uses: joerick/pr-labels-action@v1.0.8
-      - run: echo "PR labels ${{steps.pr-labels.outputs.labels}}"
+      - run: echo "PR labels are '${{steps.pr-labels.outputs.labels}}'"
