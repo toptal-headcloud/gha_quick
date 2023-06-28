@@ -8,6 +8,12 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - name: Display context
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: |
+            console.log(JSON.stringify(context, null, 2));
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "Branch has labels ${{ join(github.event.issue.labels.*.name, ', ') }}."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
