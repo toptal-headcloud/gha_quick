@@ -12,6 +12,7 @@
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "css-minimizer-webpack-plugin": "^5.0.1",
+    "git-revision-webpack-plugin": "^5.0.0",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "webpack": "^5.87.0",

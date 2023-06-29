@@ -1,11 +1,21 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, labeled, unlabeled]
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - name: Display context
+        uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: |
+            console.log(JSON.stringify(context, null, 2));
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "Branch has labels ${{ join(github.event.pull_request.labels.*.name, ', ') }}."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code
@@ -16,3 +26,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Get PR labels
+        id: pr-labels
+        uses: joerick/pr-labels-action@v1.0.8
+      - run: echo "PR labels are '${{join(steps.pr-labels.outputs.labels, ':')}}'"
